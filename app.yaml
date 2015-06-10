@@ -9,7 +9,39 @@ jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/template"))
 
 class MainPage(webapp2.RequestHandler):
-    """ Handler for the front page."""
+    """ Handler for the front page."""application: food-point
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /images
+  static_dir: images
+
+- url: /scripts
+  static_dir: scripts
+
+# Twitter Bootstrap
+- url: /bootstrap
+  static_dir: bootstrap
+
+# Handler for front page
+- url: /
+  script: food-point.app
+
+# All other pages require login
+- url: /.*
+  script: food-point.app
+  login: required
+
+libraries:
+- name: jinja2
+  version: latest
 
     def get(self):
         template = jinja_environment.get_template('home.html')
