@@ -5,3 +5,32 @@ h2 {
 	padding-top: 25px;
 	padding-bottom: 25px;
 }
+#search{
+	border: 3px solid #2ECCFA;
+	float:right;
+	position: relative;
+	left: 0px;
+	bottom: 0px;
+	border-radius: 5px;
+	background-color: ;
+	height: 20px;
+	width: 250px;
+}
+#search p{
+	position: relative;
+	bottom: 13px;
+	left: 3px;
+	font-size: 1em;
+	font-weight: bold;
+	color: #2ECCFA;
+	text-align: left;
+}
+
+#login{
+	float:right;
+	position: relative;
+	left: 120px;
+	bottom: -12px;
+	height: 5px;
+	width: 120px;
+}
