@@ -15,6 +15,79 @@ class MainPage(webapp2.RequestHandler):
         template = jinja_environment.get_template('home.html')
         self.response.out.write(template.render())
 
+# Datastore definitions
+class Persons(ndb.Model):
+    # Models a person. Key is the email.
+    next_item = ndb.IntegerProperty()  # item_id for the next item
+
+class Items(ndb.Model):
+    # Models an item with item_link, image_link, description, and date. Key is item_id.
+    item_id = ndb.IntegerProperty()
+    food_name = ndb.StringProperty()
+    address = ndb.TextProperty()
+    cuisine= ndb.TextProperty()
+	rating= ndb.IntegerProperty()
+    date = ndb.DateTimeProperty(auto_now_add=True)
+	
+class newfoodlocation(webapp2.RequestHandler):
+    """ Form for getting and displaying all the food locations user has entered before. """
+
+    def show(self):
+        # Displays the page. Used by both get and post
+        user = users.get_current_user()
+        if user:  # signed in already
+
+            # Retrieve person
+            parent_key = ndb.Key('Persons', users.get_current_user().email())
+
+            # Retrieve items
+            query = ndb.gql("SELECT * "
+                            "FROM Items "
+                           "WHERE ANCESTOR IS :1 "
+                            "ORDER BY date DESC",
+                             parent_key)
+
+            template_values = {
+                'user_mail': users.get_current_user().email(),
+                'logout': users.create_logout_url(self.request.host_url),
+                'items': query,
+            }
+
+            template = jinja_environment.get_template('newfoodlocation.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(self.request.host_url)
+
+    def get(self):
+        self.show()
+
+    def post(self):
+        # Retrieve person
+        parent = ndb.Key('Persons', users.get_current_user().email())
+        person = parent.get()
+        if person == None:
+            person = Persons(id=users.get_current_user().email())
+            person.next_item = 1
+
+        item = Items(parent=parent, id=str(person.next_item))
+        item.item_id = person.next_item
+
+        item.food_link = self.request.get('food_url')
+        item.food_name = self.request.get('food_name')
+        item.cuisine = self.request.get('food_cuisine')
+		item.rating = self.request.get('food_rating')
+		item.address = self.request.get('food_address')
+        self.show()
+		
+# For deleting an item from wish list
+class DeleteItem(webapp2.RequestHandler):
+    # Delete item specified by user
+
+    def post(self):
+        item = ndb.Key('Persons', users.get_current_user().email(), 'Items', self.request.get('itemid'))
+        item.delete()
+        self.redirect('/newfoodlocation')
+
 
 app = webapp2.WSGIApplication([('/', MainPage)],
                               debug=True)
