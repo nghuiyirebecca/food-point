@@ -34,3 +34,8 @@ h2 {
 	height: 5px;
 	width: 120px;
 }
+
+label {
+    display: block;
+    margin-bottom: 20px;
+}
