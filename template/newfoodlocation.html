@@ -1,0 +1,91 @@
+<html>
+
+<head>
+	<link type="text/css" rel="stylesheet" href="../stylesheets/front.css">
+	<title> foodPoint add new food location </title>
+</head>
+
+<body>
+
+	<h2>Welcome to #foodPoint!</h2>
+	
+	<div id="search">
+		<p>search by keyword</p>
+	</div>
+	
+	<div id="login">
+		<p style="color:blue; font-family: Arial"><strong>Sign in/Log in</strong></p>
+	</div>
+	
+	<form action="/NewFood" method="post">
+		<fieldset>
+			<legend>Add a new #foodpoint!</legend>
+				<label>
+					Name of #foodpoint: <textarea rows="1" cols = "30" name="food_name"> </textarea>
+				</label>
+				<label>
+					Address of #foodpoint: 
+					<textarea rows="2" cols="30" name="food_address"> </textarea>
+				</label>
+				<label>
+					Type of cuisine: 
+					<textarea rows="1" cols="30" name="food_cuisine"> </textarea>
+				</label>
+				<label>
+					Upload a picture of your meal:
+					<input type="file" name="food_pic" accept="image/*">
+				</label>
+				<label>
+					Rate your meal: (out of 5 stars)
+					<br>
+					<input type="radio" name="food_rating" value="0"> 0 (Never eating here again)
+					<br>
+					<input type="radio" name="food_rating" value="1"> 1 (Food was barely edible)
+					<br>
+					<input type="radio" name="food_rating" value="2"> 2 (It was mediocre)
+					<br>
+					<input type="radio" name="food_rating" value="3"> 3 (Food tasted okay)
+					<br>
+					<input type="radio" name="food_rating" value="4"> 4 (Would recommend to friends)
+					<br>
+					<input type="radio" name="food_rating" value="5"> 5 (Coming back next week!)
+				</label>
+				<label>
+					URL (optional):
+					<input type="url" name="food_url">
+				</label>
+				
+				<input type="submit" value="Submit your #foodpoint!">
+		
+		
+		</fieldset>
+	</form>
+	
+	<table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Name of #foodPoint</th>
+            <th>Address</th>
+            <th>Cuisine</th>
+			<th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.food_name }} <br>
+					<form action="/deleteitem" method="post">
+                        <input type="hidden" name="itemid" value="{{ item.item_id }}">
+                        <input type="submit" value="Delete">
+                    </form>
+				</td>
+                <td>{{ item.address }} </td> 
+                <td>{{ item.cuisine }} </td>
+                <td>{{ item.rating }} </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
