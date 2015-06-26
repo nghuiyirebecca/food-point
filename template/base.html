@@ -1,16 +1,24 @@
+<!DOCTYPE HTML>
 <html>
 
 <head>
+	<title>home_user</title>
 	<link type="text/css" rel="stylesheet" href="../stylesheets/front.css">
 </head>
 
 <body>
-	<div id="search">
-		<p>search by keyword</p>
-	</div>
+	<h2>Welcome to #foodPoint!</h2>
+	
+	<div id="create"><a href="/newfoodlocation">Create #foodpoint</a></div>
+	
 	<div class="span4 offset8 signin-align">
         <span> {{ user_mail }} <a href="{{ logout }}">logout</a></span>
 	</div>
+	<div id="search">
+		<p>search by keyword</p>
+	</div>
+	{% block content %}{% endblock %}
 <body>
+
 
 </html>
