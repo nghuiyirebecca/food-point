@@ -9,8 +9,8 @@ h2 {
 	border: 3px solid #2ECCFA;
 	float:right;
 	position: relative;
-	left: 0px;
-	bottom: 0px;
+	left: 160px;
+	bottom: 19px;
 	border-radius: 5px;
 	background-color: ;
 	height: 20px;
@@ -29,8 +29,8 @@ h2 {
 #login{
 	float:right;
 	position: relative;
-	left: 120px;
-	bottom: -12px;
+	left: 50px;
+	bottom: 15px;
 	height: 5px;
 	width: 120px;
 }
@@ -38,8 +38,8 @@ h2 {
 div span {
 	float: right;
 	position: relative;
-	left: 168px;
-	bottom: -30px;
+	left: -95px;
+	bottom: -6px;
 }
 
 label {
