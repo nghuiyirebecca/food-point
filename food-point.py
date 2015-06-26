@@ -97,5 +97,6 @@ class DeleteItem(webapp2.RequestHandler):
         self.redirect('/newfoodlocation')
 
 app = webapp2.WSGIApplication([('/', MainPage),
-								('/login', MainPageUser)],
+                                ('/login', MainPageUser),
+                              ('/newfoodlocation',newfoodlocation)],
                               debug=True)
