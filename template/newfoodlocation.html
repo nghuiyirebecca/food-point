@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+
 <html>
 
 <head>
@@ -6,17 +9,6 @@
 </head>
 
 <body>
-
-	<h2>Welcome to #foodPoint!</h2>
-	
-	<div id="search">
-		<p>search by keyword</p>
-	</div>
-	
-	<div id="login">
-		<p style="color:blue; font-family: Arial"><strong>Sign in/Log in</strong></p>
-	</div>
-	
 	<form action="/NewFood" method="post">
 		<fieldset>
 			<legend>Add a new #foodpoint!</legend>
@@ -89,3 +81,4 @@
 </body>
 
 </html>
+{% endblock %}
