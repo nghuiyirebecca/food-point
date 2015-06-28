@@ -9,13 +9,13 @@
 </head>
 
 <body>
-	<form action="/NewFood" method="post">
+	<form action="/newfoodlocation" enctype="multipart/form-data" method="post">
 		<fieldset>
 			<legend>Add a new #foodpoint!</legend>
 				<label>
 					Name of #foodpoint: <textarea rows="1" cols = "30" name="food_name"> </textarea>
 				</label>
-				<label>
+				<label> 
 					Address of #foodpoint: 
 					<textarea rows="2" cols="30" name="food_address"> </textarea>
 				</label>
@@ -25,7 +25,7 @@
 				</label>
 				<label>
 					Upload a picture of your meal:
-					<input type="file" name="food_pic" accept="image/*">
+					<input type="file" name="img"/>
 				</label>
 				<label>
 					Rate your meal: (out of 5 stars)
@@ -65,8 +65,8 @@
         <tbody>
         {% for item in items %}
             <tr>
-                <td>{{ item.food_name }} <br>
-					<form action="/deleteitem" method="post">
+                <td>{{ item.food_name }}<br>
+					<form action="/newfoodlocation" method="post">
                         <input type="hidden" name="itemid" value="{{ item.item_id }}">
                         <input type="submit" value="Delete">
                     </form>
