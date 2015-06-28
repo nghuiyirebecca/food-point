@@ -40,6 +40,7 @@ class Persons(ndb.Model):
     next_item = ndb.IntegerProperty()  # item_id for the next item
 class Items(ndb.Model):
     # Models an item with item_link, image_link, description, and date. Key is item_id.
+    picture = ndb.BlobProperty()
     item_id = ndb.IntegerProperty()
     food_name = ndb.StringProperty()
     address = ndb.TextProperty()
@@ -81,11 +82,17 @@ class newfoodlocation(webapp2.RequestHandler):
             person.next_item = 1
         item = Items(parent=parent, id=str(person.next_item))
         item.item_id = person.next_item
+
         item.food_link = self.request.get('food_url')
+        item.picture = self.request.get('img')
         item.food_name = self.request.get('food_name')
         item.cuisine = self.request.get('food_cuisine')
-	item.rating = self.request.get('food_rating')
+	item.rating = int(self.request.get('food_rating'))
 	item.address = self.request.get('food_address')
+
+        person.next_item += 1
+        person.put()
+        item.put()
         self.show()
 		
 # For deleting an item from wish list
