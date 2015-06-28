@@ -46,3 +46,12 @@ label {
     display: block;
     margin-bottom: 20px;
 }
+/*
+#create{
+	position: absolute;
+}
+*/
+#list{
+	position: relative;
+	margin-left: 200px;
+}
