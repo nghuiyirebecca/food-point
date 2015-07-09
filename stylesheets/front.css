@@ -34,15 +34,15 @@ label {
 #searchbox{
 	position: relative;
 	width: 247px; 
-	height: 15px;
+	height: 19px;
 	outline: 2px solid #2ECCFA;
 	float: right;
 	left: 155px;
-	bottom: 19px;	
+	bottom: 21px;
 }
 #go{
 	position:absolute;
 	float: right;
-	left: 888px;
+	left: 886px;
 	bottom: 589px;	
 	}
