@@ -16,8 +16,8 @@
 	<div class="span4 offset8 signin-align">
         <span> {{ user_mail }} <a href="{{ logout }}">logout</a></span>
 	</div>
-	<form action="search" id="search">
-		<textarea placeholder="Search #foodpoints by keyword"></textarea>
+	<form action="/search" >
+		<textarea id="searchbox" placeholder="Search #foodpoints by keyword"></textarea>
 		<!---<input type="submit" value="Go">--->
 	</form>
 	{% block content %}{% endblock %}
