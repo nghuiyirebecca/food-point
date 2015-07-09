@@ -105,10 +105,48 @@ class DeleteItem(webapp2.RequestHandler):
         item = ndb.Key('Persons', users.get_current_user().email(), 'Items', self.request.get('itemid'))
         item.delete()
         self.redirect('/newfoodlocation')
+ 
+class Search(webapp2.RequestHandler):
+    # Display search page
 
+    def get(self):
+        user = users.get_current_user()
+        if user:  # signed in already
+            template_values = {
+                'user_mail': users.get_current_user().email(),
+                'logout': users.create_logout_url(self.request.host_url),
+            }
+            template = jinja_environment.get_template('search.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(self.request.host_url)
+
+class Display(webapp2.RequestHandler):
+    # Displays search result
+
+    def post(self):
+        target = self.request.get('keyword').rstrip()
+        # Retrieve person
+        parent_key = ndb.Key('Persons', target)
+
+        query = ndb.gql("SELECT * "
+                        "FROM Items "
+                        "WHERE ANCESTOR IS :1 "
+                        "ORDER BY date DESC",
+                        parent_key)
+
+        template_values = {
+            'user_mail': users.get_current_user().email(),
+            'target_mail': target,
+            'logout': users.create_logout_url(self.request.host_url),
+            'items': query,
+        }
+        template = jinja_environment.get_template('search.html')
+        self.response.out.write(template.render(template_values))
 
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/login', MainPageUser),
                                ('/newfoodlocation',newfoodlocation),
-                               ('/deleteitem',DeleteItem)],
+                               ('/deleteitem',DeleteItem),
+                               ('/search',Search)],
                               debug=True)
