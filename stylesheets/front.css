@@ -5,27 +5,7 @@ h2 {
 	padding-top: 25px;
 	padding-bottom: 25px;
 }
-/*#search{
-	border: 3px solid #2ECCFA;
-	float:right;
-	position: relative;
-	left: 160px;
-	bottom: 19px;
-	border-radius: 5px;
-	background-color: ;
-	height: 20px;
-	width: 250px;
-}
-#search p{
-	position: relative;
-	bottom: 13px;
-	left: 3px;
-	font-size: 1em;
-	font-weight: bold;
-	color: #2ECCFA;
-	text-align: left;
-}
-*/
+
 #login{
 	float:right;
 	position: relative;
@@ -46,22 +26,23 @@ label {
     display: block;
     margin-bottom: 20px;
 }
-/*
-#create{
-	position: absolute;
-}
-*/
+
 #list{
 	position: relative;
 	margin-left: 200px;
 }
 #searchbox{
 	position: relative;
-	width: 244px; 
+	width: 247px; 
 	height: 15px;
 	outline: 2px solid #2ECCFA;
 	float: right;
 	left: 155px;
-	bottom: 19px;
-	
+	bottom: 19px;	
 }
+#go{
+	position:absolute;
+	float: right;
+	left: 888px;
+	bottom: 589px;	
+	}
