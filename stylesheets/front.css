@@ -55,7 +55,7 @@ label {
 	position: relative;
 	margin-left: 200px;
 }
-textarea {
+#searchbox{
 	position: relative;
 	width: 244px; 
 	height: 15px;
