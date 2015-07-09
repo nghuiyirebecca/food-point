@@ -5,7 +5,7 @@ h2 {
 	padding-top: 25px;
 	padding-bottom: 25px;
 }
-#search{
+/*#search{
 	border: 3px solid #2ECCFA;
 	float:right;
 	position: relative;
@@ -25,7 +25,7 @@ h2 {
 	color: #2ECCFA;
 	text-align: left;
 }
-
+*/
 #login{
 	float:right;
 	position: relative;
@@ -54,4 +54,14 @@ label {
 #list{
 	position: relative;
 	margin-left: 200px;
+}
+textarea {
+	position: relative;
+	width: 244px; 
+	height: 15px;
+	outline: 2px solid #2ECCFA;
+	float: right;
+	left: 155px;
+	bottom: 19px;
+	
 }
