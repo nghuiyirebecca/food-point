@@ -41,8 +41,8 @@ label {
 	bottom: 21px;
 }
 #go{
-	position:absolute;
+	position:relative;
 	float: right;
-	left: 886px;
-	bottom: 589px;	
+	left: 407px;
+	bottom: 19px;	
 	}
