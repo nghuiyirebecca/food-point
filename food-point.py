@@ -66,9 +66,7 @@ class newfoodlocation(webapp2.RequestHandler):
                            "WHERE ANCESTOR IS :1 "
                             "ORDER BY date DESC",
                              parent_key)
-            #for item in query:
-            #    self.response.out.write('<div><img src="/img?img_id=%s"></img>' %
-            #                        item.key.urlsafe())
+            
             template_values = {
                 'user_mail': users.get_current_user().email(),
                 'logout': users.create_logout_url(self.request.host_url),
@@ -91,8 +89,7 @@ class newfoodlocation(webapp2.RequestHandler):
         item.item_id = person.next_item
 
         item.food_link = self.request.get('food_url')
-        picture = self.request.get('img')
-        item.picture = images.resize(picture,64,64)
+        item.picture = self.request.get('img')
         item.food_name = self.request.get('food_name')
         item.cuisine = self.request.get('food_cuisine')
 	item.rating = int(self.request.get('food_rating'))
