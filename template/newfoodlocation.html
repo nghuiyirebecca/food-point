@@ -67,7 +67,7 @@
         <tbody>
         {% for item in items %}
             <tr>
-				<td><div><img src="/img?img_id={{ item.key.urlsafe() }}"></img></div></td>
+				<td><div><img src="/img?img_id={{ item.key.urlsafe() }}" width="180" height="100"></img></div></td>
 				<td>{{ item.food_name }}</td>
                 <td>{{ item.address }} </td> 
                 <td>{{ item.cuisine }} </td>
