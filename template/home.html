@@ -1,24 +1,27 @@
+<!DOCTYPE HTML>
 <html>
 
 <head>
+	<title>home_user</title>
 	<link type="text/css" rel="stylesheet" href="../stylesheets/front.css">
-	<title> foodPoint home </title>
 </head>
 
 <body>
-
 	<h2>Welcome to #foodPoint!</h2>
 	
-	<div id="login">
-		<p style="color:blue; font-family: Arial">
-		<strong><a href="/login">Log in</a></strong>
-		</p>
-	</div>
+	<div id="create"><a href="/newfoodlocation">Create #foodpoint</a></div>
 	
-	<p>Upload photos of what you eat</p>
-	<p>Rate and comment on your food</p>
-	<p>Share your opinions with other foodies</p>
+	<!--div id="list"><a href="/uploaded">Uploads</a></div>-->
+	
+	<div class="span4 offset8 signin-align">
+        <span> {{ user_mail }} <a href="{{ logout }}">logout</a></span>
+	</div>
+	<form action="/search" >
+		<textarea id="searchbox" placeholder="Search #foodpoints by keyword"></textarea>
+		<input type="submit" id="go" value="Go">
+	</form>
+	{% block content %}{% endblock %}
+<body>
 
-</body>
 
 </html>
