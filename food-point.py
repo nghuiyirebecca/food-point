@@ -141,13 +141,14 @@ class ShowAll(webapp2.RequestHandler):
 
             
 # For deleting foodpoint
-@classmethod
 class DeleteItem(webapp2.RequestHandler):
     # Delete item specified by user
     def post(self):
         #Remove search doc form index 'food'
-        doc_id = self.request.get('itemid')
-        cls.getIndex().remove(doc_id)
+        doc_id = users.get_current_user().email() + self.request.get('itemid')
+        index = search.Index(name='food')
+        index.delete(doc_id)
+        
         #Remove item from Items
         item = ndb.Key('Persons', users.get_current_user().email(), 'Items', self.request.get('itemid'))
         item.delete()
@@ -161,9 +162,11 @@ class Search(webapp2.RequestHandler):
                     #{'query': query}))
                     {'query': query.encode('utf-8')}))
 
+#Display Search Results
 class Display(webapp2.RequestHandler):
     def get(self):
         query = ''
+        search_results = ''
         uri = urlparse(self.request.uri)
         query = parse_qs(uri.query)
         query = query['query'][0]
@@ -181,20 +184,18 @@ class Display(webapp2.RequestHandler):
         query_obj = search.Query(query_string=query, options=query_options)
         search_results = search.Index(name='food').search(query=query_obj)
 
+        
+        search_list = ''
+        error = ''
         # get doc_id
         search_ids = [x.doc_id for x in search_results.results]
 
         #doc_id corresponds to search_id in Items, so retrieve Items with
         #exact search_id property
-        
-        search_list = ''
-        error = ''
-        try:
-            search_list = Items.query(Items.search_id.IN(search_ids)).order(-Items.date)
-            if search_list == '':
-                error = "search result not found"
-        except Exception, e:
-            error = 'Search result not found'
+        search_list = Items.query(Items.search_id.IN(search_ids)).order(-Items.date)
+
+        if search_results == '':
+            error = "Search result not found"
         url = users.create_logout_url(self.request.uri)
         if error == '':
             template_values = {
@@ -208,10 +209,10 @@ class Display(webapp2.RequestHandler):
             self.response.out.write(template.render(template_values))
         else:
             self.showAll(error, item.picture, item.food_name,
-                         item.address,item.cuisine
-                         ,item.rating)
+                         item.address,item.cuisine,
+                         item.rating)
 
-##
+#Create document in index to search
 def CreateDocument(key,food_name,address,cuisine,description,rating):
     """Creates a search.Document from content written by the author."""
     # Let the search service supply the document id.
