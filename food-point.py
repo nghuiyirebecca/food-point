@@ -76,7 +76,9 @@ class newfoodlocation(webapp2.RequestHandler):
                            "WHERE ANCESTOR IS :1 "
                             "ORDER BY date DESC",
                              parent_key)
-            
+            #if no error, display successful
+            if err=='':
+                err = 'Submission Successful!'
             template_values = {
                 'error': err,
                 'user_mail': users.get_current_user().email(),
@@ -105,12 +107,15 @@ class newfoodlocation(webapp2.RequestHandler):
         try:
             item.item_id = person.next_item
             item.food_link = self.request.get('food_url')
-            item.picture = self.request.get('img')
+            picture = self.request.get('img')
+            item.picture = images.resize(picture,width=360,height =200)
             item.description = self.request.get('description')
             item.food_name = self.request.get('food_name')
             item.cuisine = self.request.get('food_cuisine')
             item.rating = int(self.request.get('food_rating'))
             item.address = self.request.get('food_address')
+            if (item.picture=='') or (item.description=='') or (item.food_name=='') or (item.cuisine=='') or (item.rating==''):
+                error = error + 'notfilled'
         except Exception, e:
             error="Error: Not all compulsory fields filled"
         if error=='':
