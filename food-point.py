@@ -106,25 +106,25 @@ class newfoodlocation(webapp2.RequestHandler):
             item.food_link = self.request.get('food_url')
             item.picture = images.resize(self.request.get('img'),width=360,height =200)
 
-            item.description = ''
-            item.cuisine = ''
-            item.address = ''
-            item.food_name = ''
+            item.description = ' '
+            item.cuisine = ' '
+            item.address = ' '
+            item.food_name = ' '
 
             item.description = self.request.get('description')
             item.cuisine = self.request.get('food_cuisine')
             rating = self.request.get('food_rating')
             item.address = self.request.get('food_address')
             item.food_name = self.request.get('food_name')
-            if rating=='':
+            if rating==' ':
                 error = 'Empty rating'
-            if item.description=='':
+            if item.description==' ':
                 error = 'Empty description'
-            if item.food_name=='':
-                error = 'Empty food name'
-            if item.cuisine=='':
+            if item.food_name==' ':
+                error = 'Empty foodpoint name'
+            if item.cuisine==' ':
                 error = 'Empty cuisine'
-            if item.address=='':
+            if item.address==' ':
                 error = 'Empty address'
         except Exception, e:
             error="Error: Not all compulsory fields filled"
