@@ -20,6 +20,18 @@ h2 {
     transform: translate(-50%, -50%);
 }
 
+
+body.homepage {
+	background: url(https://static.pexels.com/photos/6949/food-healthy-summer-green.jpeg);
+    background-size: 1600px 1200px;
+    background-repeat: no-repeat;
+	background-position: center;
+}
+
+body.base {
+	background-color: #a7bd5b;
+}
+
 #search{
 	border: 3px solid #2ECCFA;
 	float:right;
@@ -55,12 +67,6 @@ h2 {
     transform: translate(-50%, -50%);
 }
 
-body {
-    background: url(https://static.pexels.com/photos/6949/food-healthy-summer-green.jpeg);
-    background-size: 1600px 1200px;
-    background-repeat: no-repeat;
-	background-position: center;
-}
 
 div span {
 	float: right;
@@ -93,3 +99,234 @@ label {
 	left: 407px;
 	bottom: 19px;	
 	}
+
+//Edited from: http://codepen.io/Savantos/pen/mHIpt
+@import url(http://fonts.googleapis.com/css?family=Nunito:300);
+body {
+  font-family: "Nunito", sans-serif;
+  font-size: 24px;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  text-align: center;
+}
+
+sup {
+  font-size: 36px;
+  font-weight: 100;
+  line-height: 55px;
+}
+
+.button {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  color: #0C5;
+  font-size: 24px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 300;
+  margin: 5em auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 20px 0;
+  width: 420px;
+  height: 30px;
+  background: #0D6;
+  border: 1px solid #0D6;
+  color: #FFF;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+.button:hover,
+.button:active {
+  text-decoration: none;
+  color: #0C5;
+  border-color: #0C5;
+  background: #FFF;
+}
+
+.button span {
+  display: inline-block;
+  position: relative;
+  padding-right: 0;
+  transition: padding-right 0.5s;
+}
+
+.button span:after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  right: -18px;
+  opacity: 0;
+  width: 10px;
+  height: 10px;
+  margin-top: -10px;
+  background: rgba(0, 0, 0, 0);
+  border: 3px solid #FFF;
+  border-top: none;
+  border-right: none;
+  transition: opacity 0.5s, top 0.5s, right 0.5s;
+  transform: rotate(-45deg);
+}
+
+.button:hover span,
+.button:active span {
+  padding-right: 30px;
+}
+
+.button:hover span:after,
+.button:active span:after {
+  transition: opacity 0.5s, top 0.5s, right 0.5s;
+  opacity: 1;
+  border-color: #0C5;
+  right: 0;
+  top: 50%;
+}
+
+.button2 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  color: #0C5;
+  font-size: 24px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 300;
+  margin: 10em auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 20px 0;
+  width: 420px;
+  height: 30px;
+  background: #0D6;
+  border: 1px solid #0D6;
+  color: #FFF;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+.button2:hover,
+.button2:active {
+  text-decoration: none;
+  color: #0C5;
+  border-color: #0C5;
+  background: #FFF;
+}
+
+.button2 span {
+  display: inline-block;
+  position: relative;
+  padding-right: 0;
+  transition: padding-right 0.5s;
+}
+
+.button2 span:after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  right: -18px;
+  opacity: 0;
+  width: 10px;
+  height: 10px;
+  margin-top: -10px;
+  background: rgba(0, 0, 0, 0);
+  border: 3px solid #FFF;
+  border-top: none;
+  border-right: none;
+  transition: opacity 0.5s, top 0.5s, right 0.5s;
+  transform: rotate(-45deg);
+}
+
+.button2:hover span,
+.button2:active span {
+  padding-right: 30px;
+}
+
+.button2:hover span:after,
+.button2:active span:after {
+  transition: opacity 0.5s, top 0.5s, right 0.5s;
+  opacity: 1;
+  border-color: #0C5;
+  right: 0;
+  top: 50%;
+}
+
+.button3 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  color: #0C5;
+  font-size: 24px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 300;
+  margin: 15em auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 20px 0;
+  width: 420px;
+  height: 30px;
+  background: #0D6;
+  border: 1px solid #0D6;
+  color: #FFF;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+.button3:hover,
+.button3:active {
+  text-decoration: none;
+  color: #0C5;
+  border-color: #0C5;
+  background: #FFF;
+}
+
+.button3 span {
+  display: inline-block;
+  position: relative;
+  padding-right: 0;
+  transition: padding-right 0.5s;
+}
+
+.button3 span:after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  right: -18px;
+  opacity: 0;
+  width: 10px;
+  height: 10px;
+  margin-top: -10px;
+  background: rgba(0, 0, 0, 0);
+  border: 3px solid #FFF;
+  border-top: none;
+  border-right: none;
+  transition: opacity 0.5s, top 0.5s, right 0.5s;
+  transform: rotate(-45deg);
+}
+
+.button3:hover span,
+.button3:active span {
+  padding-right: 30px;
+}
+
+.button2:hover span:after,
+.button2:active span:after {
+  transition: opacity 0.5s, top 0.5s, right 0.5s;
+  opacity: 1;
+  border-color: #0C5;
+  right: 0;
+  top: 50%;
+}
