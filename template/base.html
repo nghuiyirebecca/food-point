@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -12,13 +11,13 @@
 	
 	<div id="create"><a href="/newfoodlocation">Create #foodpoint</a></div>
 	
-	<!--div id="list"><a href="/uploaded">Uploads</a></div>-->
+	<div id="list"><a href="/showall">All Uploads</a></div>
 	
 	<div class="span4 offset8 signin-align">
         <span> {{ user_mail }} <a href="{{ logout }}">logout</a></span>
 	</div>
-	<form action="/search" >
-		<textarea id="searchbox" placeholder="Search #foodpoints by keyword"></textarea>
+	<form action="/search" method="get">
+		<textarea id="searchbox" placeholder="Search #foodpoints by keyword" name="keyword"></textarea>
 		<input type="submit" id="go" value="Go">
 	</form>
 	{% block content %}{% endblock %}
