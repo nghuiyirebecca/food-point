@@ -104,18 +104,34 @@ class newfoodlocation(webapp2.RequestHandler):
         try:
             item.item_id = person.next_item
             item.food_link = self.request.get('food_url')
-            picture = self.request.get('img')
-            item.picture = images.resize(picture,width=360,height =200)
+            item.picture = images.resize(self.request.get('img'),width=360,height =200)
+
+            item.description = ''
+            item.cuisine = ''
+            item.address = ''
+            item.food_name = ''
+            item.rating = ''
+
             item.description = self.request.get('description')
-            item.food_name = self.request.get('food_name')
             item.cuisine = self.request.get('food_cuisine')
-            item.rating = int(self.request.get('food_rating'))
+            item.rating = self.request.get('food_rating')
             item.address = self.request.get('food_address')
-            if (item.picture=='') or (item.description=='') or (item.food_name=='') or (item.cuisine=='') or (item.rating==''):
-                error = error + 'notfilled'
+            item.food_name = self.request.get('food_name')
+            if item.rating=='':
+                error = 'Empty rating'
+            if item.description=='':
+                error = 'Empty description'
+            if item.food_name=='':
+                error = 'Empty food name'
+            if item.cuisine=='':
+                error = 'Empty cuisine'
+            if item.address=='':
+                error = 'Empty address'
         except Exception, e:
             error="Error: Not all compulsory fields filled"
         if error=='':
+            item.rating = int(item.rating)
+
             key = users.get_current_user().email()+str(item.item_id)
             item.search_id = key
             #create search document
