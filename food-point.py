@@ -76,9 +76,6 @@ class newfoodlocation(webapp2.RequestHandler):
                            "WHERE ANCESTOR IS :1 "
                             "ORDER BY date DESC",
                              parent_key)
-            #if no error, display successful
-            if err=='':
-                err = 'Submission Successful!'
             template_values = {
                 'error': err,
                 'user_mail': users.get_current_user().email(),
