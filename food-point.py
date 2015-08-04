@@ -64,7 +64,7 @@ class Items(ndb.Model):
 
 class newfoodlocation(webapp2.RequestHandler):
      #Form for getting and displaying all the food locations user has entered before. 
-    def show(self):
+    def show(self, err=''):
         # Displays the page. Used by both get and post
         user = users.get_current_user()
         if user:  # signed in already
@@ -78,6 +78,7 @@ class newfoodlocation(webapp2.RequestHandler):
                              parent_key)
             
             template_values = {
+                'error': err,
                 'user_mail': users.get_current_user().email(),
                 'logout': users.create_logout_url(self.request.host_url),
                 'items': query,
@@ -99,26 +100,34 @@ class newfoodlocation(webapp2.RequestHandler):
             person.next_item = 1
         item = Items(parent=parent, id=str(person.next_item))
 
-        #Retrieve item properties
-        item.item_id = person.next_item
-        item.food_link = self.request.get('food_url')
-        item.picture = self.request.get('img')
-        item.description = self.request.get('description')
-        item.food_name = self.request.get('food_name')
-        item.cuisine = self.request.get('food_cuisine')
-	item.rating = int(self.request.get('food_rating'))
-	item.address = self.request.get('food_address')
-	key = users.get_current_user().email()+str(item.item_id)
-        item.search_id = key
-        #create search document
-        search.Index(name='food').put(CreateDocument(key,item.food_name,
-                                                    item.address,item.cuisine,
-                                                     item.description,item.rating))
+        #Retrieve item properties and ensure compulsory fields are filled
+        error = ''
+        try:
+            item.item_id = person.next_item
+            item.food_link = self.request.get('food_url')
+            item.picture = self.request.get('img')
+            item.description = self.request.get('description')
+            item.food_name = self.request.get('food_name')
+            item.cuisine = self.request.get('food_cuisine')
+            item.rating = int(self.request.get('food_rating'))
+            item.address = self.request.get('food_address')
+        except Exception, e:
+            error="Error: Not all compulsory fields filled"
+        if error=='':
+            key = users.get_current_user().email()+str(item.item_id)
+            item.search_id = key
+            #create search document
+            search.Index(name='food').put(CreateDocument(key,item.food_name,
+                                                        item.address,item.cuisine,
+                                                         item.description,item.rating))
         
-        person.next_item += 1
-        person.put()
-        item.put()
-        self.show()
+            person.next_item += 1
+            person.put()
+            item.put()
+            self.show()
+        else:
+            self.show(error)
+            
 
 # Full List
 class ShowAll(webapp2.RequestHandler): 
@@ -138,8 +147,6 @@ class ShowAll(webapp2.RequestHandler):
         template = jinja_environment.get_template('showall.html')
         self.response.out.write(template.render(template_values))
 
-
-            
 # For deleting foodpoint
 class DeleteItem(webapp2.RequestHandler):
     # Delete item specified by user
@@ -184,8 +191,6 @@ class Display(webapp2.RequestHandler):
         query_obj = search.Query(query_string=query, options=query_options)
         search_results = search.Index(name='food').search(query=query_obj)
 
-        
-        search_list = ''
         error = ''
         # get doc_id
         search_ids = [x.doc_id for x in search_results.results]
@@ -193,24 +198,29 @@ class Display(webapp2.RequestHandler):
         #doc_id corresponds to search_id in Items, so retrieve Items with
         #exact search_id property
         search_list = Items.query(Items.search_id.IN(search_ids)).order(-Items.date)
+        
 
-        if search_results == '':
-            error = "Search result not found"
         url = users.create_logout_url(self.request.uri)
-        if error == '':
+
+        template_values = {
+            'user_mail': users.get_current_user().email(),
+            'logout': users.create_logout_url(self.request.host_url),
+            'url': url,
+            'items':search_list,
+        }
+        #Exception if 0 search results found
+        try:
+            template = jinja_environment.get_template('display.html')
+            self.response.out.write(template.render(template_values))
+        except Exception, e:
             template_values = {
-                'user_mail': users.get_current_user().email(),
-                'logout': users.create_logout_url(self.request.host_url),
-                'results': search_results,
-                'url': url,
-                'items':search_list,
+            'user_mail': users.get_current_user().email(),
+            'logout': users.create_logout_url(self.request.host_url),
+            'url': url,
+            'items': '',
             }
             template = jinja_environment.get_template('display.html')
             self.response.out.write(template.render(template_values))
-        else:
-            self.showAll(error, item.picture, item.food_name,
-                         item.address,item.cuisine,
-                         item.rating)
 
 #Create document in index to search
 def CreateDocument(key,food_name,address,cuisine,description,rating):
