@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+ <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Name of #foodPoint</th>
+            <th>Address</th>
+            <th>Cuisine</th>
+			<th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+				<td><div><img src="/img?img_id={{ item.key.urlsafe() }}" width="180" height="100"></img></div></td>
+				<td>{{ item.food_name }}</td>
+                <td>{{ item.address }} </td> 
+                <td>{{ item.cuisine }} </td>
+                <td>{{ item.rating }} <br></td>
+				
+				
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
