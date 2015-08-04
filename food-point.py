@@ -113,11 +113,9 @@ class newfoodlocation(webapp2.RequestHandler):
 
             item.description = self.request.get('description')
             item.cuisine = self.request.get('food_cuisine')
-            rating = self.request.get('food_rating')
+            item.rating = int(self.request.get('food_rating'))
             item.address = self.request.get('food_address')
             item.food_name = self.request.get('food_name')
-            if rating==' ':
-                error = 'Empty rating'
             if item.description==' ':
                 error = 'Empty description'
             if item.food_name==' ':
@@ -127,9 +125,8 @@ class newfoodlocation(webapp2.RequestHandler):
             if item.address==' ':
                 error = 'Empty address'
         except Exception, e:
-            error="Error: Not all compulsory fields filled"
+            error="Error: "
         if error=='':
-            item.rating = int(rating)
 
             key = users.get_current_user().email()+str(item.item_id)
             item.search_id = key
