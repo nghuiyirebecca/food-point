@@ -5,7 +5,9 @@ h2 {
 	padding-top: 25px;
 	padding-bottom: 25px;
 }
-
+#useremail{
+	bottom: 22px;
+}
 #mainpage {
 	font-family: Book Antiqua;
 	color: #F0FFF0;
@@ -91,13 +93,13 @@ label {
 	outline: 2px solid #2ECCFA;
 	float: right;
 	left: 155px;
-	bottom: 21px;
+	bottom: 46px;
 }
 #go{
 	position:relative;
 	float: right;
 	left: 407px;
-	bottom: 19px;	
+	bottom: 44px;	
 	}
 
 //Edited from: http://codepen.io/Savantos/pen/mHIpt
