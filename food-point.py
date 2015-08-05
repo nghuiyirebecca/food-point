@@ -15,7 +15,7 @@ from google.appengine.ext import db
 from urlparse import urlparse
 from google.appengine.api import images
 from google.appengine.api import search 
-
+from google.appengine.datastore.datastore_query import Cursor
 
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/template"))
@@ -168,16 +168,28 @@ class ShowAll(webapp2.RequestHandler):
     # Display search page
     def get(self):
         #Retrieve all Items
-        query = ndb.gql("SELECT * "
+        """query = ndb.gql("SELECT * "
                         "FROM Items "
                         "ORDER BY date DESC"
-                        )
-        template_values = {
-            'user_mail': users.get_current_user().email(),
-            'logout': users.create_logout_url(self.request.host_url),
-            'items': query,
-        }
-            
+                        )"""
+        curs = Cursor(urlsafe=self.request.get('cursor'))
+        uploads, next_curs, more = Items.query().fetch_page(5, start_cursor=curs)
+        
+        shownext = None
+        if more and next_curs:
+            shownext = "true"
+
+        fullnexturl = "/showall?cursor=" + next_curs.urlsafe()
+        
+        for upload in uploads:
+            template_values = {
+                'nextpageurl': fullnexturl,
+                'shownext': shownext,
+                'user_mail': users.get_current_user().email(),
+                'logout': users.create_logout_url(self.request.host_url),
+                'items': uploads,
+            }          
+
         template = jinja_environment.get_template('showall.html')
         self.response.out.write(template.render(template_values))
 
