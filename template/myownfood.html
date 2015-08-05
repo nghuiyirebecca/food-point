@@ -15,6 +15,7 @@
             <th>Name of #foodPoint</th>
             <th>Address</th>
             <th>Cuisine</th>
+            <th>Describe your food!</th>
 			<th>Rating</th>
 			<th></th>
         </tr>
@@ -26,6 +27,7 @@
 				<td>{{ item.food_name }}</td>
                 <td>{{ item.address }} </td> 
                 <td>{{ item.cuisine }} </td>
+                <td>{{ item.description }}</td>
                 <td>{{ item.rating }} <br></td>
 				<td><br><form action="/deleteitem" method="post">
                         <input type="hidden" name="itemid" value="{{ item.item_id }}">
