@@ -123,7 +123,7 @@ sup {
   line-height: 55px;
 }
 
-.button {
+.button, .button2, .button3 {
   text-transform: uppercase;
   letter-spacing: 2px;
   text-align: center;
@@ -131,7 +131,6 @@ sup {
   font-size: 24px;
   font-family: "Nunito", sans-serif;
   font-weight: 300;
-  margin: 5em auto;
   position: absolute;
   top: 0;
   right: 0;
@@ -147,22 +146,38 @@ sup {
   transition: all 0.5s;
 }
 
+.button {
+	margin: 5em auto;
+}
+
+.button2{
+	margin: 10em auto;
+}
+
+.button3{
+	margin: 15em auto;
+}
+
 .button:hover,
-.button:active {
+.button:active, 
+.button2:hover,
+.button2:active,
+.button3:hover,
+.button3:active {
   text-decoration: none;
   color: #0C5;
   border-color: #0C5;
   background: #FFF;
 }
 
-.button span {
+.button span, .button2 span, .button3 span {
   display: inline-block;
   position: relative;
   padding-right: 0;
   transition: padding-right 0.5s;
 }
 
-.button span:after {
+.button span:after, .button2 span:after, .button3 span:after {
   content: ' ';
   position: absolute;
   top: 0;
@@ -180,155 +195,56 @@ sup {
 }
 
 .button:hover span,
-.button:active span {
-  padding-right: 30px;
-}
-
-.button:hover span:after,
-.button:active span:after {
-  transition: opacity 0.5s, top 0.5s, right 0.5s;
-  opacity: 1;
-  border-color: #0C5;
-  right: 0;
-  top: 50%;
-}
-
-.button2 {
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-align: center;
-  color: #0C5;
-  font-size: 24px;
-  font-family: "Nunito", sans-serif;
-  font-weight: 300;
-  margin: 10em auto;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 20px 0;
-  width: 420px;
-  height: 30px;
-  background: #0D6;
-  border: 1px solid #0D6;
-  color: #FFF;
-  overflow: hidden;
-  transition: all 0.5s;
-}
-
-.button2:hover,
-.button2:active {
-  text-decoration: none;
-  color: #0C5;
-  border-color: #0C5;
-  background: #FFF;
-}
-
-.button2 span {
-  display: inline-block;
-  position: relative;
-  padding-right: 0;
-  transition: padding-right 0.5s;
-}
-
-.button2 span:after {
-  content: ' ';
-  position: absolute;
-  top: 0;
-  right: -18px;
-  opacity: 0;
-  width: 10px;
-  height: 10px;
-  margin-top: -10px;
-  background: rgba(0, 0, 0, 0);
-  border: 3px solid #FFF;
-  border-top: none;
-  border-right: none;
-  transition: opacity 0.5s, top 0.5s, right 0.5s;
-  transform: rotate(-45deg);
-}
-
+.button:active span,
 .button2:hover span,
-.button2:active span {
-  padding-right: 30px;
-}
-
-.button2:hover span:after,
-.button2:active span:after {
-  transition: opacity 0.5s, top 0.5s, right 0.5s;
-  opacity: 1;
-  border-color: #0C5;
-  right: 0;
-  top: 50%;
-}
-
-.button3 {
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-align: center;
-  color: #0C5;
-  font-size: 24px;
-  font-family: "Nunito", sans-serif;
-  font-weight: 300;
-  margin: 15em auto;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 20px 0;
-  width: 420px;
-  height: 30px;
-  background: #0D6;
-  border: 1px solid #0D6;
-  color: #FFF;
-  overflow: hidden;
-  transition: all 0.5s;
-}
-
-.button3:hover,
-.button3:active {
-  text-decoration: none;
-  color: #0C5;
-  border-color: #0C5;
-  background: #FFF;
-}
-
-.button3 span {
-  display: inline-block;
-  position: relative;
-  padding-right: 0;
-  transition: padding-right 0.5s;
-}
-
-.button3 span:after {
-  content: ' ';
-  position: absolute;
-  top: 0;
-  right: -18px;
-  opacity: 0;
-  width: 10px;
-  height: 10px;
-  margin-top: -10px;
-  background: rgba(0, 0, 0, 0);
-  border: 3px solid #FFF;
-  border-top: none;
-  border-right: none;
-  transition: opacity 0.5s, top 0.5s, right 0.5s;
-  transform: rotate(-45deg);
-}
-
+.button2:active span,
 .button3:hover span,
 .button3:active span {
   padding-right: 30px;
 }
 
+.button:hover span:after,
+.button:active span:after,
 .button2:hover span:after,
-.button2:active span:after {
+.button2:active span:after,
+.button3:hover span:after,
+.button3:active span:after {
   transition: opacity 0.5s, top 0.5s, right 0.5s;
   opacity: 1;
   border-color: #0C5;
   right: 0;
   top: 50%;
+}
+
+table {
+color: #333;
+font-family:Helvetica,Arial,sans-serif;
+width:100%;
+border-spacing:1px;
+border-collapse:separate;
+padding:0 3px;
+}
+
+td, th {
+height:30px;
+text-align:center;
+width:auto;
+}
+
+th {
+background:#5bbd84;
+font-weight:700;
+border-radius: 5px;
+}
+
+td {
+background:#9ae36d;
+}
+
+tr:nth-child(even) td {
+background:#bdac5b;
+}
+
+tr:nth-child(odd) td {
+background:#a7bd5b;
 }
