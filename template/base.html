@@ -10,7 +10,7 @@
 	<h2><a href="/login">Welcome!</a></h2>
 	
 	<div class="span4 offset8 signin-align">
-        <span> {{ user_mail }} <a href="{{ logout }}">logout</a></span>
+        <span id="useremail"> {{ user_mail }} <a href="{{ logout }}">logout</a></span>
 	</div>
 	<form action="/search" method="get">
 		<textarea id="searchbox" placeholder="Search #foodpoints by keyword" name="keyword"></textarea>
