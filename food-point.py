@@ -194,7 +194,7 @@ class DeleteItem(webapp2.RequestHandler):
         #Remove item from Items
         item = ndb.Key('Persons', users.get_current_user().email(), 'Items', self.request.get('itemid'))
         item.delete()
-        self.redirect('/newfoodlocation')
+        self.redirect('/myownfood')
 
 class Search(webapp2.RequestHandler):
     # Send to Display
