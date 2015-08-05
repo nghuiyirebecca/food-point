@@ -23,6 +23,10 @@
 				
             </tr>
         {% endfor %}
+		
         </tbody>
     </table>
+	{% if items == "" %}
+		<p style="margin-right: 1045px;">No results found</p>
+	{% endif %}
 {% endblock %}
