@@ -98,7 +98,6 @@ class newfoodlocation(webapp2.RequestHandler):
         error = ''
         try:
             item.item_id = person.next_item
-            item.food_link = self.request.get('food_url')
             item.picture = images.resize(self.request.get('img'),width=360,height =200)
 
             item.description = ' '
