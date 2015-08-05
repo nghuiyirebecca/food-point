@@ -70,18 +70,13 @@ class newfoodlocation(webapp2.RequestHandler):
         if user:  # signed in already
             # Retrieve person
             parent_key = ndb.Key('Persons', users.get_current_user().email())
-            # Retrieve items
-            query = ndb.gql("SELECT * "
-                            "FROM Items "
-                           "WHERE ANCESTOR IS :1 "
-                            "ORDER BY date DESC",
-                             parent_key)
+
             template_values = {
                 'error': err,
                 'user_mail': users.get_current_user().email(),
                 'logout': users.create_logout_url(self.request.host_url),
-                'items': query,
             }
+            
             template = jinja_environment.get_template('newfoodlocation.html')
             self.response.out.write(template.render(template_values))
         else:
@@ -125,7 +120,7 @@ class newfoodlocation(webapp2.RequestHandler):
             if item.address==' ':
                 error = 'Empty address'
         except Exception, e:
-            error="Error: "
+            error="Error: Invalid option"
         if error=='':
 
             key = users.get_current_user().email()+str(item.item_id)
@@ -138,10 +133,36 @@ class newfoodlocation(webapp2.RequestHandler):
             person.next_item += 1
             person.put()
             item.put()
-            self.show()
+            self.redirect('/myownfood')
         else:
             self.show(error)
-            
+
+#Display Users uploads
+class ShowPersonal(webapp2.RequestHandler):
+        #Retrieve personal Items
+    def get(self):
+
+        # Displays the page. Used by both get and post
+        user = users.get_current_user()
+        if user:  # signed in already
+            # Retrieve person
+            parent_key = ndb.Key('Persons', users.get_current_user().email())
+            # Retrieve items
+            query = ndb.gql("SELECT * "
+                            "FROM Items "
+                           "WHERE ANCESTOR IS :1 "
+                            "ORDER BY date DESC",
+                             parent_key)
+            template_values = {
+                'user_mail': users.get_current_user().email(),
+                'logout': users.create_logout_url(self.request.host_url),
+                'items': query,
+            }
+            template = jinja_environment.get_template('myownfood.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(self.request.host_url)
+ 
 
 # Full List
 class ShowAll(webapp2.RequestHandler): 
@@ -267,5 +288,6 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                ('/search', Search),
                                ('/display',Display),
                                ('/img', Image),
-                               ('/showall', ShowAll)],
+                               ('/showall', ShowAll),
+                               ('/myownfood',ShowPersonal)],
                               debug=True)
